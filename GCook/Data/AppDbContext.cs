@@ -17,5 +17,12 @@ public class AppDbContext : IdentityDbContext
     public DbSet<ReceitaIngrediente> ReceitaIngredientes { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
 
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        
+        builder.Entity<ReceitaIngrediente>()
+            .HasKey(ri => new { ri.ReceitaId, ri.IngredienteId });
 
+    }
 }
